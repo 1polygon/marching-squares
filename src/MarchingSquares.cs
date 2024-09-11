@@ -93,20 +93,15 @@ public class MarchingSquares
                 if (tr > iso) index |= 4;
                 if (tl > iso) index |= 8;
 
-                localVertices[0] = Interpolate(new Vector2(-0.5f, 0.5f), new Vector2(0.5f, 0.5f), tl, tr); // Top
-                localVertices[1] = Interpolate(new Vector2(-0.5f, -0.5f), new Vector2(0.5f, -0.5f), bl, br); // Bottom
-                localVertices[2] = Interpolate(new Vector2(-0.5f, 0.5f), new Vector2(-0.5f, -0.5f), tl, bl); // Left
-                localVertices[3] = Interpolate(new Vector2(0.5f, 0.5f), new Vector2(0.5f, -0.5f), tr, br); // Right
+                localVertices[0] = Interpolate(new Vector2(0, 1), new Vector2(1, 1), tl, tr); // Top
+                localVertices[1] = Interpolate(new Vector2(0, 0), new Vector2(1, 0), bl, br); // Bottom
+                localVertices[2] = Interpolate(new Vector2(0, 1), new Vector2(0, 0), tl, bl); // Left
+                localVertices[3] = Interpolate(new Vector2(1, 1), new Vector2(1, 0), tr, br); // Right
 
-                localVertices[4] = new Vector2(-0.5f, 0.5f); // Top left
-                localVertices[5] = new Vector2(0.5f, 0.5f); // Top right
-                localVertices[6] = new Vector2(-0.5f, -0.5f); // Bottom left
-                localVertices[7] = new Vector2(0.5f, -0.5f); // Bottom right
-
-                for (int i = 0; i < localVertices.Length; i++)
-                {
-                    localVertices[i] += new Vector2(0.5f, 0.5f);
-                }
+                localVertices[4] = new Vector2(0, 1); // Top left
+                localVertices[5] = new Vector2(1, 1); // Top right
+                localVertices[6] = new Vector2(0, 0); // Bottom left
+                localVertices[7] = new Vector2(1, 0); // Bottom right
 
                 var localTriangles = triTable[index];
                 for (int i = 0; i < localTriangles.Length; i += 3)
