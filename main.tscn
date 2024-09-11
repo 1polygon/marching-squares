@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://cgyo27hmjambf"]
+
+[ext_resource type="Script" path="res://src/MarchingSquaresMesh.cs" id="1_i6yrd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ik5w2"]
+albedo_color = Color(0.262932, 0.262932, 0.262932, 1)
+metallic_specular = 0.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_efc7t"]
+
+[sub_resource type="Sky" id="Sky_p0wy4"]
+
+[sub_resource type="Environment" id="Environment_tghvr"]
+background_mode = 1
+background_color = Color(0.403476, 0.619838, 0.781224, 1)
+sky = SubResource("Sky_p0wy4")
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_wqgbr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_82xkp"]
+size = Vector3(8, 8, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.37392)
+projection = 1
+size = 16.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_ik5w2")
+mesh = SubResource("ArrayMesh_efc7t")
+script = ExtResource("1_i6yrd")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tghvr")
+camera_attributes = SubResource("CameraAttributesPractical_wqgbr")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+light_energy = 0.75
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -163.0
+offset_bottom = 55.0
+grow_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 152.0
+offset_bottom = 74.0
+
+[node name="Button" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Reset"
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.92995)
+visible = false
+mesh = SubResource("BoxMesh_82xkp")
+
+[connection signal="pressed" from="UI/VBoxContainer/Button" to="MeshInstance3D" method="OnResetButtonPressed"]
